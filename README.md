@@ -4,6 +4,7 @@ PromiseAnchor is a GenLayer dApp for recording immutable promises and testing pr
 
 ## Live deployment
 
+- Demo: https://promise-anchor.vercel.app/
 - Network: GenLayer Studionet
 - Chain ID: `61999`
 - Contract: `0x87Ec1A70241F68587268505730f682434A03D062`
@@ -22,6 +23,18 @@ PromiseAnchor is a GenLayer dApp for recording immutable promises and testing pr
 5. Anyone can inspect promise and exception state without connecting a wallet.
 
 No user role is hardcoded in the frontend. The contract derives authorization from stored promise state and rejects unauthorized calls.
+
+## Verified runtime proof
+
+The complete load-bearing flow was executed against the Project deployment on September 21, 2026:
+
+1. The promisor created promise `1` for a separate promisee wallet.
+2. The promisor proposed: `Replacement is not owed for damage caused by the renter's own modifications.`
+3. GenLayer consensus returned `PROMISE_REMAINS_MEANINGFUL` and accepted the exception.
+4. The promisee acknowledged exception `1`.
+5. The accepted contract state reported `1` attempt, `1` accepted exception, `1` active exception, and `0` blocked acknowledgements.
+
+The create, propose, and acknowledge calls all completed with GenVM `SUCCESS` and consensus `Accepted`. The transaction history and decoded method inputs remain available through the Explorer link above. This verifies the full state transition rather than relying on a finalized receipt alone.
 
 ## Local development
 
@@ -50,4 +63,4 @@ pnpm build
 - `genlayer-js` 1.1.x
 - GenLayer Studionet RPC: `https://studio.genlayer.com/api`
 
-See [TESTING.md](./TESTING.md) for the runtime test boundary and [SUBMISSION.md](./SUBMISSION.md) for reviewer-facing deployment evidence.
+See [TESTING.md](./TESTING.md) for the exact reviewer path and completed runtime evidence, and [SUBMISSION.md](./SUBMISSION.md) for paste-ready submission details.
